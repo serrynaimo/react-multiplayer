@@ -27,6 +27,8 @@ Next, let's make it sync between clients by adding two lines of code.
 ```javascript
 /** @jsx React.DOM */
 
+ReactWebRTCSync.initSkylink('Your Skylink App Key', 'room name');
+
 var App = React.createClass({
   mixins: [React.addons.LinkedStateMixin, ReactWebRTCSync.Mixin],
   getInitialState: function() {
@@ -37,7 +39,6 @@ var App = React.createClass({
   }
 });
 
-ReactMultiplayer.initSkylink('Your Skylink App Key', 'room name');
 React.renderComponent(<App />, document.body);
 ```
 
