@@ -1,6 +1,4 @@
-var Skylink = require('skylinkjs');
-
-var skylink = new Skylink.Skylink();
+var skylink = new require('skylinkjs').Skylink();
 
 var DEFAULT_APP_KEY = null;
 var DEFAULT_ROOM = null;
@@ -39,16 +37,16 @@ var WebRTCSyncMixin = {
     this.updatingViaWebRTC = false;
   },
 
-  handleSkylinkMessage: function(peerId, content, isSelf, peerInfo) {
+  handleSkylinkMessage: function(message, peerId, peerInfo, isSelf) {
     if(!isSelf) {
-      var message = JSON.parse(content.message);
+      var msg = JSON.parse(message.content);
 
-      if(message.componentId === this._webRTCComponentId) {
+      if(msg.componentId === this._webRTCComponentId) {
         this.updatingViaWebRTC = true;
 
         // TODO: can we remove this double reconcile?
         try {
-          this.replaceState(message.update, this.handleSkylinkMessageDone);
+          this.replaceState(msg.update, this.handleSkylinkMessageDone);
         }
         catch(e) {
           this.handleSkylinkMessageDone();
