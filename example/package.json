@@ -11,7 +11,7 @@
     "browserify": "~3.30.1",
     "reactify": "git+https://github.com/andreypopp/reactify.git",
     "statics": "~0.1.0",
-    "uglifyjs": "~2.3.6",
+    "uglifyjs": "~2.4.10",
     "watchify": "~0.4.1"
   },
   "scripts": {

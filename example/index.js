@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 var React = require('react/addons');
-var ReactMultiplayer = require('react-multiplayer');
+var ReactSync = require('../');
 var marked = require('react-marked');
 
-ReactMultiplayer.setFirebaseRoot('https://YOUR_FIREBASE_ID.firebaseio.com/');
+ReactSync.initSkylink('48f72309-6dd1-47bb-9dd2-aa43f4a6a14a', 'myroom');
 
 var Notepad = React.createClass({
-  mixins: [ReactMultiplayer.Mixin, React.addons.LinkedStateMixin],
+  mixins: [ReactSync.Mixin, React.addons.LinkedStateMixin],
 
   getInitialState: function() {
     return {text: ''};

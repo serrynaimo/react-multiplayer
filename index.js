@@ -1,36 +1,26 @@
-var Firebase = require('client-firebase');
+var Skylink = require('skylinkjs');
 
-var DEFAULT_FIREBASE_ROOT = null;
+var skylink = new Skylink.Skylink();
 
-var MultiplayerMixin = {
+var DEFAULT_APP_KEY = null;
+var DEFAULT_ROOM = null;
+
+var WebRTCSyncMixin = {
   componentWillMount: function() {
-    this.updatingFromFirebase = false;
-
-    var firebaseURL = null;
-    if (this.getFirebaseURL) {
-      firebaseURL = this.getFirebaseURL();
-    } else if (DEFAULT_FIREBASE_ROOT) {
-      firebaseURL = DEFAULT_FIREBASE_ROOT;
-      if (firebaseURL[firebaseURL.length - 1] !== '/') {
-        firebaseURL += '/';
-      }
-      firebaseURL += window.btoa(this._rootNodeID + ',' + this._mountDepth);
-    } else {
-      throw new Error('Must either call setFirebaseRoot() or provide a getFirebaseURL() method');
-    }
-    this.firebase = new Firebase(firebaseURL);
+    this.updatingViaWebRTC = false;
   },
 
   componentDidMount: function() {
-    this.firebase.on('value', this.handleFirebaseValue);
+    this._webRTCComponentId = window.btoa(this._rootNodeID + ',' + this._mountDepth);
+    skylink.on('incomingMessage', this.handleSkylinkMessage);
   },
 
   componentWillUnmount: function() {
-    this.firebase.off('value', this.handleFirebaseValue);
+    skylink.off('incomingMessage', this.handleSkylinkMessage);
   },
 
   componentDidUpdate: function(prevProps, prevState) {
-    if (this.updatingFromFirebase) {
+    if (this.updatingViaWebRTC) {
       return;
     }
     var update = {};
@@ -39,23 +29,43 @@ var MultiplayerMixin = {
         update[k] = this.state[k];
       }
     }
-    this.firebase.update(update);
+    skylink.sendP2PMessage({
+      componentId: this._webRTCComponentId,
+      update: update
+    });
   },
 
-  handleFirebaseDone: function() {
-    this.updatingFromFirebase = false;
+  handleSkylinkMessageDone: function() {
+    this.updatingViaWebRTC = false;
   },
 
-  handleFirebaseValue: function(snapshot) {
-    this.updatingFromFirebase = true;
-    // TODO: can we remove this double reconcile?
-    this.replaceState(snapshot.val(), this.handleFirebaseDone);
+  handleSkylinkMessage: function(peerId, content, isSelf, peerInfo) {
+    if(!isSelf) {
+      var message = JSON.parse(content.message);
+
+      if(message.componentId === this._webRTCComponentId) {
+        this.updatingViaWebRTC = true;
+
+        // TODO: can we remove this double reconcile?
+        try {
+          this.replaceState(message.update, this.handleSkylinkMessageDone);
+        }
+        catch(e) {
+          this.handleSkylinkMessageDone();
+        }
+      }
+    }
   }
 };
 
 module.exports = {
-  Mixin: MultiplayerMixin,
-  setFirebaseRoot: function(root) {
-    DEFAULT_FIREBASE_ROOT = root;
+  Mixin: WebRTCSyncMixin,
+  initSkylink: function(key, room) {
+    DEFAULT_APPKEY = key;
+    DEFAULT_ROOM = room || '';
+
+    skylink.init(DEFAULT_APPKEY, function() {
+      skylink.joinRoom(DEFAULT_ROOM);
+    });
   }
 };
