@@ -13,11 +13,6 @@ skylink.on('peerJoined', function(peerId, peerInfo, isSelf) {
 var DEFAULT_APPKEY = null;
 var DEFAULT_ROOM = null;
 
- skylink.init(DEFAULT_APPKEY, function() {
-      skylink.joinRoom(DEFAULT_ROOM);
-    });
-
-
 var WebRTCSyncMixin = {
   componentWillMount: function() {
     this.updatingViaWebRTC = false;
