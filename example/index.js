@@ -3,7 +3,7 @@ var React = require('react/addons');
 var ReactWebRTCSync = require('../');
 var marked = require('react-marked');
 
-ReactWebRTCSync.initSkylink('48f72309-6dd1-47bb-9dd2-aa43f4a6a14a', 'myroom');
+ReactWebRTCSync.initSkylink('48f72309-6dd1-47bb-9dd2-aa43f4a6a14a');
 
 var Notepad = React.createClass({
   mixins: [ReactWebRTCSync.Mixin, React.addons.LinkedStateMixin],

@@ -1,5 +1,5 @@
-Skylink = require('skylinkjs');
 io = require('socket.io-client');
+Skylink = require('skylinkjs');
 
 skylink = new Skyway();
 
@@ -57,12 +57,7 @@ var WebRTCSyncMixin = {
         this.updatingViaWebRTC = true;
 
         // TODO: can we remove this double reconcile?
-        try {
-          this.replaceState(msg.update, this.handleSkylinkMessageDone);
-        }
-        catch(e) {
-          this.handleSkylinkMessageDone();
-        }
+        this.replaceState(msg.update, this.handleSkylinkMessageDone);
       }
     }
   }
