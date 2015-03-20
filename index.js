@@ -4,8 +4,10 @@ skylink = new Skyway();
 
 skylink.setLogLevel(skylink.LOG_LEVEL.DEBUG);
 
-skylink.on('peerJoined', function() {
-  console.log('peerJoined');
+skylink.on('peerJoined', function(peerId, peerInfo, isSelf) {
+  if(!isSelf) {
+    console.log('peerJoined');
+  }
 });
 
 var DEFAULT_APPKEY = null;
