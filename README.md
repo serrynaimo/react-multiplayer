@@ -19,7 +19,7 @@ var App = React.createClass({
   }
 });
 
-React.renderComponent(<App />, document.body);
+React.render(<App />, document.body);
 ```
 
 Next, let's make it sync between clients by adding two lines of code.
@@ -39,7 +39,7 @@ var App = React.createClass({
   }
 });
 
-React.renderComponent(<App />, document.body);
+React.render(<App />, document.body);
 ```
 
 And you're in sync. :)
