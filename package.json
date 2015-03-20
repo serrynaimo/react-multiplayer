@@ -13,7 +13,7 @@
   ],
   "author": "Thomas Gorissen",
   "license": "Apache 2",
-  "repository": "https://github.com/serrynaimo/react-multiplayer.git",
+  "repository": "https://github.com/serrynaimo/react-webrtc-sync.git",
   "dependencies": {
     "socket.io-client": "1.3.4",
     "skylinkjs": "~0.5.9"
