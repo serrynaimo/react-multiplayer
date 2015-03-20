@@ -42,18 +42,8 @@ var App = React.createClass({
 React.renderComponent(<App />, document.body);
 ```
 
-Bam. You're done.
+And you're in sync. :)
 
-
-```javascript
-/** @jsx React.DOM */
-
-var App = React.createClass({
-  mixins: [React.addons.LinkedStateMixin, ReactWebRTCSync.Mixin],
-  getInitialState: function() {
-    return {text: ''};
-  }
-```
 
 Big thanks to [Pete Hunt](https://github.com/petehunt/react-multiplayer) for his awesome work on React and react-multiplayer to get me started!
 License is Apache 2.0
