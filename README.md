@@ -1,6 +1,6 @@
 # react-webrtc-sync
 
-Make your React apps render on multiple clients viw WebRTC! This leverages [Skylink](http://skylink.io) to magically make a React component's state shared across multiple clients.
+Make your React apps render on multiple clients via WebRTC! This leverages [Skylink](http://skylink.io) to magically make a React component's state shared across multiple clients.
 
 ## Tutorial: Synced notepad
 
