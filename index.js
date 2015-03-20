@@ -1,9 +1,20 @@
 var Skylink = require('skylinkjs');
 
-var skylink = new Skylink.Skylink();
+skylink = new Skyway();
 
-var DEFAULT_APP_KEY = null;
+skylink.setLogLevel(skylink.LOG_LEVEL.DEBUG);
+
+skylink.on('peerJoined', function() {
+  console.log('peerJoined');
+});
+
+var DEFAULT_APPKEY = null;
 var DEFAULT_ROOM = null;
+
+ skylink.init(DEFAULT_APPKEY, function() {
+      skylink.joinRoom(DEFAULT_ROOM);
+    });
+
 
 var WebRTCSyncMixin = {
   componentWillMount: function() {
@@ -29,6 +40,7 @@ var WebRTCSyncMixin = {
         update[k] = this.state[k];
       }
     }
+
     skylink.sendP2PMessage({
       componentId: this._webRTCComponentId,
       update: update

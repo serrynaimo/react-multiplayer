@@ -4,7 +4,7 @@
   "description": "Quick boilerplate for browserify and React modules.",
   "main": "index.js",
   "dependencies": {
-    "react": "0.9.0-rc1",
+    "react": "~0.13.1",
     "react-marked": "~0.3.1"
   },
   "devDependencies": {

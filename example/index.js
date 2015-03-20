@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 var React = require('react/addons');
-var ReactSync = require('../');
+var ReactWebRTCSync = require('../');
 var marked = require('react-marked');
 
-ReactSync.initSkylink('48f72309-6dd1-47bb-9dd2-aa43f4a6a14a', 'myroom');
+ReactWebRTCSync.initSkylink('48f72309-6dd1-47bb-9dd2-aa43f4a6a14a', 'myroom');
 
 var Notepad = React.createClass({
-  mixins: [ReactSync.Mixin, React.addons.LinkedStateMixin],
+  mixins: [ReactWebRTCSync.Mixin, React.addons.LinkedStateMixin],
 
   getInitialState: function() {
     return {text: ''};
@@ -22,4 +22,4 @@ var Notepad = React.createClass({
   }
 });
 
-React.renderComponent(<Notepad />, document.body);
+React.render(<Notepad />, document.body);
