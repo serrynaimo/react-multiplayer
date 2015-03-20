@@ -1,4 +1,6 @@
-var skylink = new require('skylinkjs').Skylink();
+var Skylink = require('skylinkjs');
+
+var skylink = new Skylink.Skylink();
 
 var DEFAULT_APP_KEY = null;
 var DEFAULT_ROOM = null;
