@@ -1,8 +1,9 @@
-var Skylink = require('skylinkjs');
+Skylink = require('skylinkjs');
+io = require('socket.io-client');
 
 skylink = new Skyway();
 
-skylink.setLogLevel(skylink.LOG_LEVEL.DEBUG);
+//skylink.setLogLevel(skylink.LOG_LEVEL.DEBUG);
 
 skylink.on('peerJoined', function(peerId, peerInfo, isSelf) {
   if(!isSelf) {
@@ -50,7 +51,7 @@ var WebRTCSyncMixin = {
 
   handleSkylinkMessage: function(message, peerId, peerInfo, isSelf) {
     if(!isSelf) {
-      var msg = JSON.parse(message.content);
+      var msg = message.content;
 
       if(msg.componentId === this._webRTCComponentId) {
         this.updatingViaWebRTC = true;
