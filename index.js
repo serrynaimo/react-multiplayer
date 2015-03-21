@@ -1,4 +1,5 @@
 io = require('socket.io-client');
+Adapter = require('adapterjs');
 Skylink = require('skylinkjs');
 
 skylink = new Skyway();

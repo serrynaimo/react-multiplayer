@@ -16,6 +16,7 @@
   "repository": "https://github.com/serrynaimo/react-webrtc-sync.git",
   "dependencies": {
     "socket.io-client": "1.3.4",
+    "adapterjs": "~0.10.5",
     "skylinkjs": "~0.5.9"
   }
 }
